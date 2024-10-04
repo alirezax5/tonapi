@@ -1,0 +1,18 @@
+{
+    "name": "alirezax5/tonapi",
+    "autoload": {
+        "psr-4": {
+            "alirezax5\\Tonapi\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "alirezax5",
+            "email": "alirezaaghax6@gmail.com"
+        }
+    ],
+    "require": {}
+}
