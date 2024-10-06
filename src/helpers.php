@@ -1,11 +1,11 @@
 <?php
 if (!function_exists('getTransactions')) {
-    function getTransactions($address)
+    function getTransactions($address,$limit = 50)
     {
         $transactions = [];
         $typeMap = ['JettonTransfer' => 'jetton', 'TonTransfer' => 'ton', 'NftItemTransfer' => 'nft'];
 
-        $accountEvents = \alirezax5\Tonapi\Tonapi::getAccountEvents($address);
+        $accountEvents = \alirezax5\Tonapi\Tonapi::getAccountEvents($address,$limit);
         foreach ($accountEvents->events as $event) {
             $hash = $event->event_id;
             $action = $event->actions[0];
