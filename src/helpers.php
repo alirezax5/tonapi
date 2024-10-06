@@ -1,11 +1,11 @@
 <?php
 if (!function_exists('getTransactions')) {
-    function getTransactions($address,$limit = 50)
+    function getTransactions($address, $limit = 50)
     {
         $transactions = [];
         $typeMap = ['JettonTransfer' => 'jetton', 'TonTransfer' => 'ton', 'NftItemTransfer' => 'nft'];
 
-        $accountEvents = \alirezax5\Tonapi\Tonapi::getAccountEvents($address,$limit);
+        $accountEvents = \alirezax5\Tonapi\Tonapi::getAccountEvents($address, $limit);
         foreach ($accountEvents->events as $event) {
             $hash = $event->event_id;
             $action = $event->actions[0];
@@ -14,7 +14,8 @@ if (!function_exists('getTransactions')) {
             $amount = isset($action->{$action->type}->amount) ? convertSatoshiToNumber($action->{$action->type}->amount) : null;
             $comment = $action->{$action->type}->comment ?? null;
             $senderAddress = $action->{$action->type}->sender->address ?? null;
-            $recipientAddress = $action->{$action->type}->recipient->address;
+            $recipientAddress = $action->{$action->type}->recipient->address ?? null;
+
 
             $itemJetton = null;
             if ($action->type === 'JettonTransfer') {
